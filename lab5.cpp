@@ -1,17 +1,10 @@
-/******************************************************************************
-
-                            Online C Compiler.
-                Code, Compile, Run and Debug C program online.
-Write your code in this editor and press "Run" button to compile and execute it.
-
-*******************************************************************************/
 #include <iostream>
 #include <math.h>
 #include <conio.h>
 #define _USE_MATH_DEFINES
 
-#define n 5
-#define m 5
+#define numberOfRows 5
+#define numberOfColumns 5
 
 /*
 34 45 65 23 98
@@ -22,137 +15,185 @@ Write your code in this editor and press "Run" button to compile and execute it.
 */
 
 using namespace std;
-int i,j;
+int indexOfRows, indexOfColumns;
 class Matrix
 {
 public:
-    friend void OutputArray(Matrix Arr[]);
-    void SortArray(Matrix  Arr[]);
-    void CalcArray(Matrix Arr[]);
-    double M[m];
-    friend void InputArray(Matrix  Arr[]);
+  friend void outputArray (Matrix arrayConsistingOfRowElements[]);
+  void sortArray (Matrix arrayConsistingOfRowElements[]);
+  void calculateArray (Matrix arrayConsistingOfRowElements[]);
+  double arrayOfEveryRowElement[numberOfColumns];
+  friend void inputArray (Matrix arrayConsistingOfRowElements[]);
 
 
 };
-void InputArray(Matrix  Arr[])
-{
-    cout<<"Enter array"<<endl;
-
-    for(i = 0; i < n; i++){
-
-        for(j = 0; j < m; j++){
-
-           // cout<<"Input No.["<<i<<"]["<<j<<"]:";
-            cin>>Arr[i].M[j];
-
-        }
-
-    }
-
-}
-
-
-void OutputArray(Matrix  Arr[])
+void
+inputArray (Matrix arrayConsistingOfRowElements[])
 {
 
-    for (i = 0; i < n; ++i)
+
+  for (indexOfRows = 0; indexOfRows < numberOfRows; indexOfRows++)
     {
-        for (j = 0; j < m; ++j)
-        {
-            cout << Arr[i].M[j] << "\t";
-        }
-        cout << endl;
-    }
-}
-void SortArray(Matrix  arr[])
-{
-for (int i = 0; i < n; i++)
-{
-for (int BlockSizeIterator = 1; BlockSizeIterator < n; BlockSizeIterator *= 2)
-{
-for (int BlockIterator = 0; BlockIterator < n - BlockSizeIterator; BlockIterator += 2 * BlockSizeIterator)
-{
-int LeftBlockIterator = 0;
-int RightBlockIterator = 0;
-int LeftBorder = BlockIterator;
-int MidBorder = BlockIterator + BlockSizeIterator;
-int RightBorder = BlockIterator + 2 * BlockSizeIterator;
-RightBorder = (RightBorder < n) ? RightBorder : n;
-int* SortedBlock = new int[RightBorder - LeftBorder];
 
-while (LeftBorder + LeftBlockIterator < MidBorder && MidBorder + RightBlockIterator < RightBorder)
-{
-if (arr[LeftBorder + LeftBlockIterator].M[i] < arr[MidBorder + RightBlockIterator].M[i])
-{
-SortedBlock[LeftBlockIterator + RightBlockIterator] = arr[LeftBorder + LeftBlockIterator].M[i];
-LeftBlockIterator++;
-}
-else
-{
-SortedBlock[LeftBlockIterator + RightBlockIterator] = arr[MidBorder + RightBlockIterator].M[i];
-RightBlockIterator++;
-}
-}
-while (LeftBorder + LeftBlockIterator < MidBorder)
-{
-SortedBlock[LeftBlockIterator + RightBlockIterator] = arr[LeftBorder + LeftBlockIterator].M[i];
-LeftBlockIterator++;
-}
-while (MidBorder + RightBlockIterator < RightBorder)
-{
-SortedBlock[LeftBlockIterator + RightBlockIterator] = arr[MidBorder + RightBlockIterator].M[i];
-RightBlockIterator++;
-}
+      for (indexOfColumns = 0; indexOfColumns < numberOfColumns;
+	   indexOfColumns++)
+	{
 
-for (int MergeIterator = 0; MergeIterator < LeftBlockIterator + RightBlockIterator; MergeIterator++)
-{
-arr[LeftBorder + MergeIterator].M[i] = SortedBlock[MergeIterator];
-}
-delete SortedBlock;
 
-}
+	  cin >> arrayConsistingOfRowElements[indexOfRows].
+	    arrayOfEveryRowElement[indexOfColumns];
 
-}
-}
-}
-void CalcArray(Matrix Arr[]) {
-    double mult[n-1] = {1, 1, 1, 1};
-    double Geom[n-1];
-    for(int i = 0; i < n-1; i++) {
-        for(int j = i+1; j < n; j++) {
+	}
 
-            mult[i]*=Arr[i].M[j];
-
-        }
-    double z=pow((n-i-1),-1.0);
-    Geom[i]=pow(fabs((mult[i])), z);
-    }
-    double haunt;
-    for (int i = 0; i < n-1; i++) {
-        
-        haunt += Geom[i];
-        cout << "f(" << i << "): " << Geom[i] << endl;
     }
 
+}
 
 
-    cout << "F(f(ij)): " << haunt << endl;
+void
+outputArray (Matrix arrayConsistingOfRowElements[])
+{
+
+  for (indexOfRows = 0; indexOfRows < numberOfRows; ++indexOfRows)
+    {
+      for (indexOfColumns = 0; indexOfColumns < numberOfColumns;
+	   ++indexOfColumns)
+	{
+	  cout << arrayConsistingOfRowElements[indexOfRows].
+	    arrayOfEveryRowElement[indexOfColumns] << "\t";
+	}
+      cout << endl;
+    }
+}
+
+void
+sortArray (Matrix arr[])
+{
+  for (int indexOfRows = 0; indexOfRows < numberOfRows; indexOfRows++)
+    {
+      for (int blockSizeIterator = 1; blockSizeIterator < numberOfRows;
+	   blockSizeIterator *= 2)
+	{
+	  for (int blockIterator = 0;
+	       blockIterator < numberOfRows - blockSizeIterator;
+	       blockIterator += 2 * blockSizeIterator)
+	    {
+	      int leftBlockIterator = 0;
+	      int rightBlockIterator = 0;
+	      int leftBorder = blockIterator;
+	      int midBorder = blockIterator + blockSizeIterator;
+	      int rightBorder = blockIterator + 2 * blockSizeIterator;
+	      rightBorder =
+		(rightBorder < numberOfRows) ? rightBorder : numberOfRows;
+	      int *sortedBlock = new int[rightBorder - leftBorder];
+
+	      while (leftBorder + leftBlockIterator < midBorder
+		     && midBorder + rightBlockIterator < rightBorder)
+		{
+		  if (arr[leftBorder + leftBlockIterator].
+		      arrayOfEveryRowElement[indexOfRows] <
+		      arr[midBorder +
+			  rightBlockIterator].
+		      arrayOfEveryRowElement[indexOfRows])
+		    {
+		      sortedBlock[leftBlockIterator + rightBlockIterator] =
+			arr[leftBorder +
+			    leftBlockIterator].
+			arrayOfEveryRowElement[indexOfRows];
+		      leftBlockIterator++;
+		    }
+		  else
+		    {
+		      sortedBlock[leftBlockIterator + rightBlockIterator] =
+			arr[midBorder +
+			    rightBlockIterator].
+			arrayOfEveryRowElement[indexOfRows];
+		      rightBlockIterator++;
+		    }
+		}
+	      while (leftBorder + leftBlockIterator < midBorder)
+		{
+		  sortedBlock[leftBlockIterator + rightBlockIterator] =
+		    arr[leftBorder +
+			leftBlockIterator].
+		    arrayOfEveryRowElement[indexOfRows];
+		  leftBlockIterator++;
+		}
+	      while (midBorder + rightBlockIterator < rightBorder)
+		{
+		  sortedBlock[leftBlockIterator + rightBlockIterator] =
+		    arr[midBorder +
+			rightBlockIterator].
+		    arrayOfEveryRowElement[indexOfRows];
+		  rightBlockIterator++;
+		}
+
+	      for (int mergeIterator = 0;
+		   mergeIterator < leftBlockIterator + rightBlockIterator;
+		   mergeIterator++)
+		{
+		  arr[leftBorder +
+		      mergeIterator].arrayOfEveryRowElement[indexOfRows] =
+		    sortedBlock[mergeIterator];
+		}
+	      delete sortedBlock;
+
+	    }
+
+	}
+    }
+}
+
+void
+calculateArray (Matrix arrayConsistingOfRowElements[])
+{
+  double productOfElementsOverMainDiagonal[numberOfRows - 1] = { 1, 1, 1, 1 };
+  double geometricMeanOfElementsOverMainDiagonal[numberOfRows - 1];
+  for (int indexOfRows = 0; indexOfRows < numberOfRows - 1; indexOfRows++)
+    {
+      for (int indexOfColumns = indexOfRows + 1;
+	   indexOfColumns < numberOfRows; indexOfColumns++)
+	{
+
+	  productOfElementsOverMainDiagonal[indexOfRows] *=
+	    arrayConsistingOfRowElements[indexOfRows].
+	    arrayOfEveryRowElement[indexOfColumns];
+
+	}
+      double power = pow ((numberOfRows - indexOfRows - 1), -1.0);
+      geometricMeanOfElementsOverMainDiagonal[indexOfRows] =
+	pow (fabs ((productOfElementsOverMainDiagonal[indexOfRows])), power);
+    }
+  double sumOfGeometricMeans;
+  for (int indexOfRows = 0; indexOfRows < numberOfRows - 1; indexOfRows++)
+    {
+
+      sumOfGeometricMeans +=
+	geometricMeanOfElementsOverMainDiagonal[indexOfRows];
+      cout << "f(" << indexOfRows << "): " <<
+	geometricMeanOfElementsOverMainDiagonal[indexOfRows] << endl;
+    }
+
+
+
+  cout << "F(f(ij)): " << sumOfGeometricMeans << endl;
 
 
 }
 
 
 
-int main()
+int
+main ()
 {
-    Matrix   Array[n];
-    cout<<"Enter elements of the matrix:"<<endl;
-    InputArray(Array);
-    cout<<endl<<"Original matrix:"<<endl;
-    OutputArray(Array);
-    SortArray(Array);
-    cout<<endl<<"Sorted matrix:"<<endl;
-    OutputArray(Array);
-    cout<<endl<<"Calculations:"<<endl;
-    CalcArray(Array);
+  Matrix array[numberOfRows];
+  cout << "Enter elements of the matrix:" << endl;
+  inputArray (array);
+  cout << endl << "Original matrix:" << endl;
+  outputArray (array);
+  sortArray (array);
+  cout << endl << "Sorted matrix:" << endl;
+  outputArray (array);
+  cout << endl << "Calculations:" << endl;
+  calculateArray (array);
 }
