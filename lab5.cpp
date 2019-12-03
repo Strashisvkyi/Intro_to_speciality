@@ -27,8 +27,7 @@ public:
 
 
 };
-void
-inputArray (Matrix arrayConsistingOfRowElements[])
+void inputArray (Matrix arrayConsistingOfRowElements[])
 {
 
 
@@ -50,8 +49,7 @@ inputArray (Matrix arrayConsistingOfRowElements[])
 }
 
 
-void
-outputArray (Matrix arrayConsistingOfRowElements[])
+void outputArray (Matrix arrayConsistingOfRowElements[])
 {
 
   for (indexOfRows = 0; indexOfRows < numberOfRows; ++indexOfRows)
@@ -66,8 +64,7 @@ outputArray (Matrix arrayConsistingOfRowElements[])
     }
 }
 
-void
-sortArray (Matrix arr[])
+void sortArray (Matrix arr[])
 {
   for (int indexOfRows = 0; indexOfRows < numberOfRows; indexOfRows++)
     {
@@ -144,8 +141,7 @@ sortArray (Matrix arr[])
     }
 }
 
-void
-calculateArray (Matrix arrayConsistingOfRowElements[])
+void calculateArray (Matrix arrayConsistingOfRowElements[])
 {
   double productOfElementsOverMainDiagonal[numberOfRows - 1] = { 1, 1, 1, 1 };
   double geometricMeanOfElementsOverMainDiagonal[numberOfRows - 1];
